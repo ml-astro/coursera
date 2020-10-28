@@ -1,15 +1,15 @@
-.navbar-text {
-	text-align: center;
-}
-
 .navbar-default {
 	background-color: #CCF;
 	color: black;
 }
 
 
-#discription {
+#description {
 	background-color: #9C9;
 	height: 1000px;
 	float: none;
+}
+
+h1 {
+	margin-bottom: 30px;
 }
