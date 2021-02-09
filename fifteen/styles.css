@@ -1,0 +1,46 @@
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+.board {
+  position: relative;
+  margin: 30px auto;
+	padding: 0;
+  border: 10px solid #555;
+  width: 500px;
+  height: 500px;
+  background-color: #ddd;
+}
+
+h1 {
+	text-align: center;
+	margin-top: 40px;
+	font-size: 3em;
+}
+
+button {
+	display: block;
+	margin: 0 auto;
+	padding: 20px;
+	font-size: 2.4em;
+}
+
+.cell {
+  display: inline-block;
+	position: absolute;
+  background: #999;
+  width: 25%;
+  height: 25%;
+  border-radius:15px;
+  border:10px solid blue;
+	font-size: 5em;
+	padding: 15px;
+	text-align: center;
+}
+
+#cell0 {
+	visibility: hidden;
+}
