@@ -1,10 +1,11 @@
 //счетчик времени
 //счетчик ходов -- внедрил, осталось вывести на экран
-//стилизация font, цвета, центровка
 var moves = 0;
-
 var places=new Array();
+
+
 function newGame() {
+  document.querySelector('.board').innerHTML='';
   while(places.length<16){
     num = Math.floor(Math.random()*16); //генерируем случайное число
     if(!places.includes(num)){ //если числа нет в массиве, то добавляем
@@ -52,14 +53,19 @@ function checkForWin(){
     if (cell.style.top.slice(0, -1) != coords[i-1][0] || cell.style.left.slice(0, -1) != coords[i-1][1]){
       break; //пишет только те ид, до которых успел дойти до момента выхода из функции
     }
-    if (i==15) {
+    else if (i==2) {
       console.log('you win');
-      //запустить функцию которая снимает все клик события, чтобы нельзя было двигать
+      endgame();
     }
   }
 }
 
-
+function endgame(){
+  for (var i = 0; i < 16; i++) {
+    document.querySelector('#cell'+i).onclick = null;
+  }
+  
+}
 
 //строим доску
   var element = document.querySelector('.board');
@@ -70,15 +76,6 @@ function checkForWin(){
     let cellid=places[i];
 
     //рисуем все ячейки
-    var div = document.createElement('div');
-    div.id = 'cell'+cellid;
-    element.appendChild(div);
-    var theCell=document.querySelector('#cell'+cellid);
-    theCell.addEventListener('click',function(){move(this)},false);
-    theCell.style.top = ypos+'%';
-    theCell.style.left = xpos+'%';
-    theCell.classList.add('cell');
-    theCell.innerHTML=places[i];
+    element.innerHTML+='<div class="cell" onclick="move(this)" id="cell'+places[i]+'" style="top:'+ypos+'%; left:'+xpos+'%">'+places[i]+'</div> ';
   }
-
 checkForWin();
