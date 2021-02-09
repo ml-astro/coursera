@@ -9,10 +9,10 @@
   position: relative;
   margin: 30px auto;
 	padding: 0;
-  border: 10px solid #555;
-  width: 500px;
-  height: 500px;
-  background-color: #ddd;
+  border: 10px solid #fc2f00;
+  width: 50vw;
+  height: 50vw;
+  background-color: white;
 }
 
 h1 {
@@ -31,13 +31,13 @@ button {
 .cell {
   display: inline-block;
 	position: absolute;
-  background: #999;
+  background: #ffbc0a;
   width: 25%;
   height: 25%;
-  border-radius:15px;
-  border:10px solid blue;
-	font-size: 5em;
-	padding: 15px;
+  border-radius:2vw;
+  border:1vw solid #ec7d10;
+	font-size: 8vw;
+	padding: 0px;
 	text-align: center;
 }
 
