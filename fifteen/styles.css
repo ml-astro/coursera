@@ -3,21 +3,22 @@
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
+	font-family: Verdana, Arial;
 }
-
+/*настроить размеры под разные устройства. относ.ширину под мобильники, относ. высоту под мониторы*/
 .board {
   position: relative;
   margin: 30px auto;
-	padding: 0;
   border: 10px solid #fc2f00;
-  width: 50vw;
-  height: 50vw;
+  width: 60vw;
+  height: 60vw;
   background-color: white;
 }
 
-h1 {
+h1, .moveCount {
 	text-align: center;
 	margin-top: 40px;
+	margin-bottom: 40px;
 	font-size: 3em;
 }
 
@@ -37,7 +38,6 @@ button {
   border-radius:2vw;
   border:1vw solid #ec7d10;
 	font-size: 8vw;
-	padding: 0px;
 	text-align: center;
 }
 

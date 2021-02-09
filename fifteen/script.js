@@ -1,34 +1,52 @@
 //счетчик времени
-//счетчик ходов -- внедрил, осталось вывести на экран
+//стилизация кнопки
+//центровка текста
 var moves = 0;
 var places=new Array();
+var coords=[];
 
+newGame();
 
+//////////////////////////// генерирует полную раскладку для доски //////////
 function newGame() {
   document.querySelector('.board').innerHTML='';
+  document.querySelector('h1').innerHTML='ПЯТНАШКИ';
+  document.querySelector('.moveCount').innerHTML='';
+  places=new Array();
+  moves = 0;
   while(places.length<16){
     num = Math.floor(Math.random()*16); //генерируем случайное число
     if(!places.includes(num)){ //если числа нет в массиве, то добавляем
       places.push(num);
     }
   }
+
+  //каждый элемент массива - массив из y и x
+  //цикл рядов
+  for (var ypos = 0; ypos <= 75; ypos+=25) {
+    //цикл столбцов
+    for (var xpos = 0; xpos <=75; xpos+=25) {
+      coords.push([ypos,xpos]);
+    }
+  }
+  buildBoard();
 }
 
-//генерируем 0-15 в случайном порядке для последующей расстановки по доске в таком же порядке
-//каждый элемент массива - массив из y и x
-//////////////////////////////////////////////этот массив с координатами можно переиспользовать для проверки выигрыша по ид
-var coords=[];
-//цикл рядов
-for (var ypos = 0; ypos <= 75; ypos+=25) {
-  //цикл столбцов
-  for (var xpos = 0; xpos <=75; xpos+=25) {
-    coords.push([ypos,xpos]);
+//////////////////////////// строит доску ///////////////////////////////////
+function buildBoard(){
+  var element = document.querySelector('.board');
+  for (i=0; i<16; i++){
+    //для каждой ячейки обозначает их координаты в %
+    let ypos=coords[i][0];
+    let xpos=coords[i][1];
+    let cellid=places[i];
+
+    //рисуем все ячейки
+    element.innerHTML+='<div class="cell" onclick="move(this)" id="cell'+places[i]+'" style="top:'+ypos+'%; left:'+xpos+'%">'+places[i]+'</div> ';
   }
 }
 
-newGame();
-
-
+//////////////////////////////// разрабатывает правила движения клеток /////////
 function move(cell){
   let emptyCell=document.querySelector('#cell0');
   let ypos=cell.style.top;
@@ -47,35 +65,29 @@ function move(cell){
 }
 
 function checkForWin(){
-//проверить на выигрыш///////////////////////////////////////////////////////////////////
+//////////////////////////////// проверить на выигрыш ////////////////////////////
   for (var i = 1; i<16; i++){
     let cell = document.getElementById('cell'+i);
     if (cell.style.top.slice(0, -1) != coords[i-1][0] || cell.style.left.slice(0, -1) != coords[i-1][1]){
       break; //пишет только те ид, до которых успел дойти до момента выхода из функции
     }
-    else if (i==15) {
-      console.log('you win');
+    else if (i==2) {
+      document.querySelector('h1').innerHTML='ПОБЕДА!';
+      ///////////////////////////// при выигрыше запускаем соотв. функцию //////
       endgame();
     }
   }
 }
 
+
+checkForWin();
+
 function endgame(){
+  ////////////// тут надо вставить onclick, который подчистит доску и сгенерирует новую /////////////
   for (var i = 0; i < 16; i++) {
     document.querySelector('#cell'+i).onclick = null;
   }
-  
+  document.querySelector('button').innerHTML = 'НОВАЯ ИГРА';
+  document.querySelector('button').setAttribute('onclick', 'newGame();');
+  document.querySelector('.moveCount').innerHTML += 'Вы сделали '+ moves +' ходов';
 }
-
-//строим доску
-  var element = document.querySelector('.board');
-  for (i=0; i<16; i++){
-    //для каждой ячейки обозначаем их координаты в %
-    let ypos=coords[i][0];
-    let xpos=coords[i][1];
-    let cellid=places[i];
-
-    //рисуем все ячейки
-    element.innerHTML+='<div class="cell" onclick="move(this)" id="cell'+places[i]+'" style="top:'+ypos+'%; left:'+xpos+'%">'+places[i]+'</div> ';
-  }
-checkForWin();
