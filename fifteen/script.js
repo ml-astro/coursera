@@ -70,7 +70,7 @@ function checkForWin(){
     if (cell.style.top.slice(0, -1) != coords[i-1][0] || cell.style.left.slice(0, -1) != coords[i-1][1]){
       break; //пишет только те ид, до которых успел дойти до момента выхода из функции
     }
-    else if (i==2) {
+    else if (i==15) {
       document.querySelector('h1').innerHTML='ПОБЕДА!';
       ///////////////////////////// при выигрыше запускаем соотв. функцию //////
       endgame();
