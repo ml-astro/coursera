@@ -1,10 +1,9 @@
-//счетчик времени, можно в виде разницы во времени
-//центровка текста
-//число ходов неправильно склоняется
 var moves = 0;
 var places=new Array();
 var coords=[];
 newGame();
+var timeStart;
+var timeEnd;
 
 //////////////////////////// генерирует полную раскладку для доски //////////
 function newGame() {
@@ -43,6 +42,7 @@ function buildBoard(){
     //рисуем все ячейки
     element.innerHTML+='<div class="cell" onclick="move(this)" id="cell'+places[i]+'" style="top:'+ypos+'%; left:'+xpos+'%">'+places[i]+'</div> ';
   }
+  timeStart = new Date();
 }
 
 //////////////////////////////// разрабатывает правила движения клеток /////////
@@ -72,6 +72,7 @@ function checkForWin(){
     }
     else if (i==15) {
       document.querySelector('h1').innerHTML='ПОБЕДА!';
+      timeEnd = new Date();
       ///////////////////////////// при выигрыше запускаем соотв. функцию //////
       endgame();
     }
@@ -87,5 +88,6 @@ function endgame(){
   }
   document.querySelector('button').innerHTML = 'НОВАЯ ИГРА';
   document.querySelector('button').setAttribute('onclick', 'newGame();');
-  document.querySelector('.moveCount').innerHTML += 'Вы сделали '+ moves +' ходов';
+  document.querySelector('.moveCount').innerHTML += 'Количество ходов: '+ moves +'</br>  ';
+  document.querySelector('.moveCount').innerHTML += 'Потрачено времени: ' + Math.floor((timeEnd-timeStart)/1000) + ' сек.';
 }
