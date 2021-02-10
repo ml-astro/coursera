@@ -9,24 +9,29 @@
 .board {
   position: relative;
   margin: 30px auto;
-  border: 10px solid #fc2f00;
-  width: 60vw;
-  height: 60vw;
+  border: 1.5vw solid #fc2f00;
+  width: 80vw;
+  height: 80vw;
   background-color: white;
+	border-radius: 1%;
 }
 
 h1, .moveCount {
 	text-align: center;
 	margin-top: 40px;
 	margin-bottom: 40px;
-	font-size: 3em;
+	font-size: 2em;
 }
 
 button {
 	display: block;
 	margin: 0 auto;
 	padding: 20px;
-	font-size: 2.4em;
+	font-size: 1.5em;
+	color: black;
+	background-color: #ffbc0a;
+	border:1vw solid #ec7d10;
+	border-radius:2vw;
 }
 
 .cell {
@@ -39,8 +44,44 @@ button {
   border:1vw solid #ec7d10;
 	font-size: 8vw;
 	text-align: center;
+	padding: 5%;
 }
 
 #cell0 {
 	visibility: hidden;
+}
+
+@media screen and (min-width:640px) {
+	.board {
+		width: 60vw;
+		height: 60vw;
+		max-width: 480px;
+		max-height: 480px
+	}
+	h1, .moveCount {
+		font-size: 3em;
+	}
+
+	.cell {
+		padding: 3%;
+	}
+}
+
+@media screen and (min-width:992px) {
+	.board {
+		width: 65vh;
+		height: 65vh;
+		border: .8vw solid #fc2f00;
+	}
+	h1, .moveCount {
+		font-size: 2.5em;
+	}
+
+	.cell {
+		padding: 1%;
+		font-size: 7vh;
+		border:.6vw solid #ec7d10;
+		border-radius: 2vh;
+	}
+}
 }
