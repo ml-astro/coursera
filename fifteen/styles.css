@@ -32,24 +32,29 @@ button {
 	border:1vw solid #ec7d10;
 	border-radius:2vw;
 }
-
 .cell {
   display: inline-block;
 	position: absolute;
-  background: #ffbc0a;
-  width: 25%;
+	background: #ffbc0a;
+	text-align:center;
+	line-height:25%;
+	width: 25%;
   height: 25%;
   border-radius:2vw;
   border:1vw solid #ec7d10;
 	font-size: 8vw;
-	text-align: center;
-	padding: 5%;
 	-webkit-touch-callout: none;
   -webkit-user-select: none;
    -khtml-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+}
+
+.cell p {
+	height: 100%;
+	margin-top: 38%;
+	vertical-align: middle;
 }
 
 #cell0 {
