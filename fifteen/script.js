@@ -40,7 +40,7 @@ function buildBoard(){
     let cellid=places[i];
 
     //рисуем все ячейки
-    element.innerHTML+='<div class="cell" onclick="move(this)" id="cell'+places[i]+'" style="top:'+ypos+'%; left:'+xpos+'%">'+places[i]+'</div> ';
+    element.innerHTML+='<div class="cell" onclick="move(this)" id="cell'+places[i]+'" style="top:'+ypos+'%; left:'+xpos+'%"><p>'+places[i]+'</p></div> ';
   }
   timeStart = new Date();
 }
