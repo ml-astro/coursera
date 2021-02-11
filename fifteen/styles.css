@@ -5,10 +5,10 @@
 	margin: 0;
 	font-family: Verdana, Arial;
 }
-/*настроить размеры под разные устройства. относ.ширину под мобильники, относ. высоту под мониторы*/
+
 .board {
   position: relative;
-  margin: 30px auto;
+  margin: 20px auto;
   border: 1.5vw solid #fc2f00;
   width: 80vw;
   height: 80vw;
@@ -18,8 +18,7 @@
 
 h1, .moveCount {
 	text-align: center;
-	margin-top: 40px;
-	margin-bottom: 40px;
+	margin-top: 20px;
 	font-size: 2em;
 }
 
