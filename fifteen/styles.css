@@ -1,48 +1,50 @@
 
 * {
 	box-sizing: border-box;
+	font-family: Verdana, Arial;
 	padding: 0;
 	margin: 0;
-	font-family: Verdana, Arial;
 }
 
 .board {
   position: relative;
+	width: 80vw;
+	height: 80vw;
   margin: 20px auto;
   border: 1.5vw solid #fc2f00;
-  width: 80vw;
-  height: 80vw;
-  background-color: white;
 	border-radius: 1%;
+  background-color: white;
 }
 
 h1, .moveCount {
-	text-align: center;
 	margin-top: 20px;
 	font-size: 2em;
+	text-align: center;
 }
 
 button {
 	display: block;
 	margin: 0 auto;
 	padding: 20px;
+	border:1vw solid #ec7d10;
+	border-radius:2vw;
 	font-size: 1.5em;
 	color: black;
 	background-color: #ffbc0a;
-	border:1vw solid #ec7d10;
-	border-radius:2vw;
 }
+
 .cell {
   display: inline-block;
 	position: absolute;
+	width: 25%;
+	height: 25%;
+	border:1vw solid #ec7d10;
+	border-radius:2vw;
 	background: #ffbc0a;
 	text-align:center;
-	line-height:25%;
-	width: 25%;
-  height: 25%;
-  border-radius:2vw;
-  border:1vw solid #ec7d10;
 	font-size: 8vw;
+	line-height:25%;
+	/*убрать возможность выделения текста*/
 	-webkit-touch-callout: none;
   -webkit-user-select: none;
    -khtml-user-select: none;
@@ -54,7 +56,6 @@ button {
 .cell p {
 	height: 100%;
 	margin-top: 38%;
-	vertical-align: middle;
 }
 
 #cell0 {
@@ -64,8 +65,8 @@ button {
 @media screen and (min-width:640px) {
 	.board {
 		width: 60vw;
-		height: 60vw;
 		max-width: 480px;
+		height: 60vw;
 		max-height: 480px
 	}
 	h1, .moveCount {
@@ -89,9 +90,9 @@ button {
 
 	.cell {
 		padding: 1%;
-		font-size: 7vh;
 		border:.6vw solid #ec7d10;
 		border-radius: 2vh;
+		font-size: 7vh;
 	}
 }
 }
