@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <title>Тригонометрический калькулятор</title>
+  </head>
+  <body>
+    <h1>Тригонометрический калькулятор для прямоугольного треугольника</h1>
+    <form>
+     <label for="sidea">Сторона а:</label>
+     <input type="number" step="any" id="sidea"><br>
+     <label for="sideb">Сторона b:</label>
+     <input type="number" step="any" id="sideb"><br>
+     <label for="sidec">Сторона c:</label>
+     <input type="number" step="any" id="sidec"><br>
+     <label for="angleA">Угол A:</label>
+     <input type="number" step="any" id="angleA"><br>
+     <label for="angleB">Угол B:</label>
+     <input type="number" step="any" id="angleB"><br>
+    </form>
+    <button onclick="calculate()">Рассчитать</button>
+    <button onclick="reset()">Обнулить</button>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>
