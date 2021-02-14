@@ -1,0 +1,110 @@
+* {
+	box-sizing: border-box;
+	font-family: Verdana, Arial;
+	padding: 0;
+	margin: 0;
+  /* border: 1px solid black; */
+}
+
+body {
+  width: 60vw;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 200%;
+  margin: 30px auto 10px auto;
+  text-align: center;
+}
+
+.main {
+  position: relative;
+}
+
+.dataform {
+  width: 40%;
+  display: inline-block;
+}
+
+img {
+  position: absolute;
+  width: 59%;
+  top: 0;
+  right: 0;
+}
+
+form {
+    position: relative;
+    width: 100%;
+    text-align: right;
+    padding: 2%;
+}
+
+label, input {
+  display: inline-block;
+  font-size: 1em;
+}
+
+label {
+    width: 35%;
+    position: absolute;
+    left: 0px;
+    text-align: right;
+    margin-right: 30px;
+}
+
+input {
+  width: 60%;
+  margin-bottom: 10%;
+
+}
+
+button {
+  margin-left: 9%;
+  width: 40%;
+  font-size: 1em;
+  padding: 10px;
+  border-radius: 5%;
+}
+
+@media screen and (max-width: 1180px) {
+  h1 {
+    font-size: 150%;
+  }
+  button {
+    margin-left: 8%;
+    /* width: 30%; */
+    font-size: .8em;
+    text-align: center;
+  }
+  img {
+    width: 60%;
+  }
+  label {
+    width: 45%;
+  }
+  input {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 900px){
+  body {
+    width: 80vw;
+  }
+  h1 {
+    font-size: 120%;
+  }
+  img {
+    position: relative;
+    display: block;
+    clear: both;
+    width: 80%;
+  }
+  .dataform {
+    width: 80%;
+  }
+  input {
+    height: 25px;
+  }
+}

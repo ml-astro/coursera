@@ -7,21 +7,26 @@
     <title>Тригонометрический калькулятор</title>
   </head>
   <body>
-    <h1>Тригонометрический калькулятор для прямоугольного треугольника</h1>
-    <form>
-     <label for="sidea">Сторона а:</label>
-     <input type="number" step="any" id="sidea"><br>
-     <label for="sideb">Сторона b:</label>
-     <input type="number" step="any" id="sideb"><br>
-     <label for="sidec">Сторона c:</label>
-     <input type="number" step="any" id="sidec"><br>
-     <label for="angleA">Угол A:</label>
-     <input type="number" step="any" id="angleA"><br>
-     <label for="angleB">Угол B:</label>
-     <input type="number" step="any" id="angleB"><br>
-    </form>
-    <button onclick="calculate()">Рассчитать</button>
-    <button onclick="reset()">Обнулить</button>
+    <h1>Тригонометрический калькулятор для&nbsp;прямоугольного треугольника</h1>
+    <div class="main">
+      <div class="dataform">
+        <form>
+          <label for="sidea">Сторона а:</label>
+          <input type="number" step="any" id="sidea"><br>
+          <label for="sideb">Сторона b:</label>
+          <input type="number" step="any" id="sideb"><br>
+          <label for="sidec">Сторона c:</label>
+          <input type="number" step="any" id="sidec"><br>
+          <label for="angleA">Угол A:</label>
+          <input type="number" step="any" id="angleA"><br>
+          <label for="angleB">Угол B:</label>
+          <input type="number" step="any" id="angleB"><br>
+        </form>
+        <button onclick="calculate()">Рассчитать</button>
+        <button onclick="reset()">Обнулить</button>
+      </div>
+      <img src="triangle.png" alt="triangle">
+    </div>
     <script type="text/javascript" src="script.js"></script>
   </body>
 </html>
