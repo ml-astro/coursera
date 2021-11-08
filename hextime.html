@@ -7,6 +7,9 @@
     <style>
         #time {
             color: white;
+            margin: 0;
+            padding: 0;
+            font-size: 5rem;
             text-align: center;
             position: absolute;
             top: 50%;
@@ -17,25 +20,15 @@
     </style>
 </head>
 <body>
-
-    <h1 id='time'></h1>
-
+    <p id='time'></p>
     <script>
         setInterval(getHexColor, 1000);
-
         function getHexColor(){
-            let currentTime = new Date()
-            let hour = currentTime.getHours()
-            let minute = currentTime.getMinutes()
-            let second = currentTime.getSeconds()
-            let hexString = '#'
-            hour < 10 ? hexString+=0+hour : hexString+=hour
-            minute < 10 ? hexString+=0+minute : hexString+=minute
-            second < 10 ? hexString+=0+second : hexString+=second
+            let currentTime = new Date().toLocaleString()
+            let hexString = '#'+ currentTime.substring(12,14) + currentTime.substring(15,17) + currentTime.substring(18,21)
             document.querySelector("#time").innerHTML=hexString
             document.body.style.backgroundColor=hexString
         }
-
     </script>
 </body>
 </html>
