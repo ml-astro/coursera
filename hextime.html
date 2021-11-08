@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hex Time</title>
+    <title>Document</title>
     <style>
         #time {
             color: white;
@@ -24,8 +24,8 @@
     <script>
         setInterval(getHexColor, 1000);
         function getHexColor(){
-            let currentTime = new Date().toLocaleString()
-            let hexString = '#'+ currentTime.substring(12,14) + currentTime.substring(15,17) + currentTime.substring(18,21)
+            let currentTime = new Date().toLocaleTimeString({hour12:false})
+            let hexString = '#'+ currentTime.substring(0,2) + currentTime.substring(3,5) + currentTime.substring(6,8)
             document.querySelector("#time").innerHTML=hexString
             document.body.style.backgroundColor=hexString
         }
