@@ -1,5 +1,3 @@
-//для видимости рисовать значения прямо на схеме треугольника
-
 //проверить условия на дурака - буквы, отрицательные значения, ноль, пустота
 
 var sidea = document.querySelector('#sidea');
@@ -7,12 +5,15 @@ var sideb = document.querySelector('#sideb');
 var sidec = document.querySelector('#sidec');
 var angleA = document.querySelector('#angleA');
 var angleB = document.querySelector('#angleB');
-//табом переключаться
-//можно сделать авторасчет при заполнении достаточного количества полей
 
 //Math.sin(10*Math.PI/180) синус 10 градусов
 function toRadians(deg){
   return deg*Math.PI/180;
+}
+
+function zero(label){
+  console.log(label);
+  document.getElementById(label).value = '';
 }
 
 function reset() {
