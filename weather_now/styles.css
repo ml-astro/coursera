@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 1px solid green;
+}
+
+section {
+    width: 20vw;
+    height: 40vh;
+    background-color: rgb(106, 176, 227);
+    border: 2px solid rgb(28, 28, 200);
+    border-radius: 1em;
+    margin: 20vh auto auto auto;
+    text-align: center;
+    padding: 1em;
+}
+
+section div {
+    height: 25%;
+}
+
+section > :nth-child(even) {
+    background-color: rgb(76, 140, 163);
+}
+
+div p {
+    height: 50%;
+}
+
+div {
+    font-size: 120%;
+}
+
+.city, .temp {
+    font-size: 2em;
+}
