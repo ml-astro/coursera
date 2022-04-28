@@ -2,14 +2,20 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Verdana,Tahoma, sans-serif;
     /*border: 1px solid green;*/
+}
+
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 section {
     width: 20vw;
     min-width: 300px;
     max-width: 400px;
-    background-color: rgba(223, 223, 223, .9);
     border: 2px solid rgba(28, 28, 200, .7);
     border-radius: 1em;
     margin: 0 auto;
@@ -17,24 +23,22 @@ section {
     padding: 1em;
 }
 
+section, ul {
+    box-shadow: 0px 0px 10px 10px rgba(70, 70, 70, .5);
+}
+
 .city, .temp {
     font-size: 30px;
     padding: .5em;
+    font-weight: bold;
 }
-
-section div {
-    height: 100px;
-    font-size: 120%;
-    padding: 1em;
-}
-
 
 .forecast {
     text-align: center;
 }
 
-.forecast p, .forecast h2 {
-    margin: 10px auto;
+.description:first-letter {
+    text-transform: capitalize;
 }
 
 img {
@@ -56,6 +60,8 @@ li {
     list-style-type: none;
     width: 19%;
     max-width: 220px;
-    background-color: rgba(223, 223, 223, .8);
-    border: 2px solid rgba(28, 28, 200, .7);
+}
+
+section, li {
+    background-color: rgba(223, 223, 223, .95);
 }

@@ -17,6 +17,7 @@
 //ясно - белый, пасмурно - синий
 //направление ветра стрелкой, скорость
 //ощущается как
+//темная тема для астро
 
 let daysTiles = document.querySelectorAll('li');
 let latitude;
@@ -33,7 +34,11 @@ function getTime(unix){
 }
 
 function temperature(temp){
-    return Math.round(temp-273.15)+'\xB0C';
+    let tempValue = '+';
+    if(temp < 0){
+        tempValue='-';
+    }
+    return tempValue+=Math.round(temp-273.15)+'\xB0C';
 }
 
 function getWeekday(unix){
@@ -64,14 +69,43 @@ function getWeekday(unix){
             case 6:
                 return 'Суббота';
                 break;
-            case 7:
-            return 'Воскресенье';
-            break;
+            case 0:
+                return 'Воскресенье';
+                break;
             default:
                 break;
         }
     }
+}
 
+function getWindDirection(deg){
+    switch (true) {
+        case (deg<22.5 || deg<360 && deg>=337.5):
+            return '&#8595; северный'
+            break;
+        case deg < 67.5:
+            return '&#8601; северо-восточный'
+            break;
+        case deg < 112.5:
+            return '&#8592; восточный'
+            break;
+        case deg < 157.5:
+            return '&#8598; юго-восточный'
+            break;
+        case deg < 202.5:
+            return '&#8593; южный'
+            break;
+        case deg < 247.5:
+            return '&#8599; юго-западный'
+            break;
+        case deg < 292.5:
+            return '&#8594; западный'
+        case deg < 337.5:
+            return '&#8600; северо-западный'
+            break;
+        default:
+            break;
+    }
 }
 
 function getImage(conditions){
@@ -95,16 +129,19 @@ function getWeather(lat, lon) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=ru&appid=e097db01d3950d1fa7a66a2926093e0f`)
     .then(function (resp) {return resp.json()})
     .then(function (data) {
-    document.querySelector('.city p').textContent=data.name.toUpperCase();
-    document.querySelector('.temp p').textContent=temperature(data.main.temp);
-    document.querySelector('.clouds p').textContent=data.weather[0].description;
-    document.querySelector('.pressure').lastChild.textContent=data.main.pressure+' hPa';
+        document.querySelector('section').innerHTML=`
+        <p>Погода в</p>
+        <h1 class="city">${data.name.toUpperCase()}</h1>
+        <p class="temp">${temperature(data.main.temp)}</p>
+        <p>Ощущается как: ${temperature(data.main.feels_like)}</p>
+        <p class="description">${data.weather[0].description}</p>
+        <p class="pressure">Давление: <span>${data.main.pressure} hPa</span></p>
+        <p>Ветер ${getWindDirection(data.wind.deg)}<br>${Math.round(data.wind.speed)} м/с</p>
+        `;
     document.querySelector('body').style.backgroundImage = `url(${getImage(data.weather[0].main)})`;
     getForecast();
 });
-
 }
-
 
 function getForecast(){
     fetch('https://api.openweathermap.org/data/2.5/onecall?lat=59.468192&lon=24.9896751&lang=ru&exclude=current,minutely,hourly,alerts&appid=e097db01d3950d1fa7a66a2926093e0f')
@@ -115,10 +152,10 @@ function getForecast(){
         for (let i = 0; i < daysTiles.length; i++) {
             daysTiles[i].innerHTML = `
             <h2>${getWeekday(data.daily[i].dt)}</h2>
-            <p>${temperature(data.daily[i].temp.day)}</p>
-            <img src=${getImage(data.daily[i].weather[0].main)}>
-            <p>${data.daily[i].weather[0].description}</p>
-            <p>${data.daily[i].clouds+'%'}</p>
+            <p class="temp">${temperature(data.daily[i].temp.day)}</p>
+            <img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png">
+            <p class='description'>${data.daily[i].weather[0].description}</p>
+            <p>Облачность ${data.daily[i].clouds+'%'}</p>
             `;
         }
     });
