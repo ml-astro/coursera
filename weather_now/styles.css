@@ -80,19 +80,6 @@ ul {
     padding: 20px;
 }
 
-
-.results {
-    display: block;
-    margin: 0;
-    background-color: rgba(223, 223, 223, .95);
-}
-
-.results li {
-    background: none;
-    padding: 0;
-    width: 100%;
-}
-
 li {
     border-radius: 5px;
     padding: 1em;
@@ -109,7 +96,38 @@ section, li {
     position: absolute;
     top: 10px;
     left: 10px;
+    width: 100%;
 }
+
+.results {
+    display: block;
+    margin: 0;
+    width: 300px;
+    background-color: rgba(223, 223, 223, .95);
+}
+
+.results li {
+    background: none;
+    padding: 0;
+    width: 100%;
+}
+
+.selectCity .results {
+    margin: 0;
+    padding: 5px;
+}
+
+input {
+    width: 200px;
+    height: 2em;
+    padding-left: 5px;
+}
+
+button {
+    width: 100px;
+    height: 2em;
+}
+
 
 @media (max-width: 1220px) {
     .city, .temp, h2 {
@@ -133,7 +151,7 @@ section, li {
 @media (max-width: 768px) {
     ul {
         display: block;
-        min-width: 320px;
+        min-width: 300px;
         max-width: 550px;
         margin: 0 auto;
     }
@@ -142,6 +160,11 @@ section, li {
         max-width: 100%;
         margin-bottom: 1em;
         position: relative;
+    }
+
+    li:last-child{
+        margin-bottom: 2px;
+
     }
     li p:last-child {
         position: relative;

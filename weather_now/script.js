@@ -32,7 +32,6 @@ function selectCity(){
     .then(function (resp) {return resp.json()})
     .then((function (data) {
         document.querySelector('.results').innerHTML='';
-        console.log(data);
         data.forEach(element => {
             let town = document.createElement('li');
             town.innerHTML = element.name + ' ' + element.country;
