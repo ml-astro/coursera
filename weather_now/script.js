@@ -1,6 +1,4 @@
 //восход, закат
-//направление ветра стрелкой, скорость
-//ощущается как
 //7 day/night
 
 //заход, время сумерек
@@ -26,7 +24,7 @@ navigator.geolocation.getCurrentPosition(setPosition);
 function setPosition(position) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
-    getWeather(latitude, longitude);
+    getCurrentWeather(latitude, longitude);
   }
 
 function getTime(unix){
@@ -125,7 +123,7 @@ function getImage(conditions){
     }
 }
 
-function getWeather(lat, lon) {
+function getCurrentWeather(lat, lon) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=ru&appid=e097db01d3950d1fa7a66a2926093e0f`)
     .then(function (resp) {return resp.json()})
     .then(function (data) {
@@ -133,10 +131,12 @@ function getWeather(lat, lon) {
         <p>Погода в</p>
         <h1 class="city">${data.name.toUpperCase()}</h1>
         <p class="temp">${temperature(data.main.temp)}</p>
-        <p>Ощущается как: ${temperature(data.main.feels_like)}</p>
         <p class="description">${data.weather[0].description}</p>
-        <p class="pressure">Давление: <span>${data.main.pressure} hPa</span></p>
+        <p>Ощущается как: ${temperature(data.main.feels_like)}</p>
         <p>Ветер ${getWindDirection(data.wind.deg)}<br>${Math.round(data.wind.speed)} м/с</p>
+        <p class="pressure">Давление: <span>${data.main.pressure} hPa</span></p>
+        <p>Восход: ${getTime(data.sys.sunrise)}</p>
+        <p>Закат: ${getTime(data.sys.sunset)}</p>
         `;
     document.querySelector('body').style.backgroundImage = `url(${getImage(data.weather[0].main)})`;
     getForecast();
