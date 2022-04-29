@@ -1,6 +1,5 @@
-//восход, закат
+//координаты по городу
 //7 day/night
-
 //заход, время сумерек
 //прогноз на ночь
 //северное сияние
@@ -11,11 +10,10 @@
 //восход и заход луны
 //clearoutside meteoblue
 //иконки день / ночь
-//фоновое изображение погодных условий
 //ясно - белый, пасмурно - синий
-//направление ветра стрелкой, скорость
-//ощущается как
 //темная тема для астро
+
+
 
 let daysTiles = document.querySelectorAll('li');
 let latitude;
@@ -27,16 +25,30 @@ function setPosition(position) {
     getCurrentWeather(latitude, longitude);
   }
 
+function selectCity(){
+    let city = document.querySelector('input').value;
+    console.log(city);
+    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=e097db01d3950d1fa7a66a2926093e0f`)
+    .then(function (resp) {return resp.json()})
+    .then((function (data) {
+        document.querySelector('.results').innerHTML='';
+        console.log(data);
+        data.forEach(element => {
+            let town = document.createElement('li');
+            town.innerHTML = element.name + ' ' + element.country;
+            town.addEventListener('click', function(){getCurrentWeather(element.lat,element.lon)});
+            document.querySelector('.results').append(town);
+        });
+        
+    }))
+}
+
 function getTime(unix){
     return new Date(unix*1000).toLocaleTimeString();
 }
 
 function temperature(temp){
-    let tempValue = '+';
-    if(temp < 0){
-        tempValue='-';
-    }
-    return tempValue+=Math.round(temp-273.15)+'\xB0C';
+    return Math.round(temp-273.15)+'\xB0C';
 }
 
 function getWeekday(unix){
@@ -123,10 +135,12 @@ function getImage(conditions){
     }
 }
 
+
 function getCurrentWeather(lat, lon) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=ru&appid=e097db01d3950d1fa7a66a2926093e0f`)
     .then(function (resp) {return resp.json()})
     .then(function (data) {
+
         document.querySelector('section').innerHTML=`
         <p>Погода в</p>
         <h1 class="city">${data.name.toUpperCase()}</h1>
@@ -139,16 +153,14 @@ function getCurrentWeather(lat, lon) {
         <p>Закат: ${getTime(data.sys.sunset)}</p>
         `;
     document.querySelector('body').style.backgroundImage = `url(${getImage(data.weather[0].main)})`;
-    getForecast();
+    getForecast(lat, lon);
 });
 }
 
-function getForecast(){
-    fetch('https://api.openweathermap.org/data/2.5/onecall?lat=59.468192&lon=24.9896751&lang=ru&exclude=current,minutely,hourly,alerts&appid=e097db01d3950d1fa7a66a2926093e0f')
+function getForecast(lat, lon){
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&lang=ru&exclude=current,minutely,hourly,alerts&appid=e097db01d3950d1fa7a66a2926093e0f`)
     .then(function (resp) {return resp.json()})
     .then(function (data) {
-        console.log(data);
-        
         for (let i = 0; i < daysTiles.length; i++) {
             daysTiles[i].innerHTML = `
             <h2>${getWeekday(data.daily[i].dt)}</h2>

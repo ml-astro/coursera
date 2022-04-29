@@ -70,6 +70,7 @@ img {
     width: 100%;
 }
 
+
 ul {
     display: flex;
     justify-content: space-between;
@@ -77,6 +78,19 @@ ul {
     border-radius: 5px;
     background-color: rgba(84, 122, 192, 0.7);
     padding: 20px;
+}
+
+
+.results {
+    display: block;
+    margin: 0;
+    background-color: rgba(223, 223, 223, .95);
+}
+
+.results li {
+    background: none;
+    padding: 0;
+    width: 100%;
 }
 
 li {
@@ -89,6 +103,12 @@ li {
 
 section, li {
     background-color: rgba(223, 223, 223, .95);
+}
+
+.selectCity {
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }
 
 @media (max-width: 1220px) {
@@ -131,6 +151,10 @@ section, li {
         position: absolute;
         right: 0;
         top: 0;
+    }
+
+    .selectCity {
+        position: relative;
     }
 
     p {
