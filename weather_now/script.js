@@ -31,6 +31,7 @@ function selectCity(){
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=e097db01d3950d1fa7a66a2926093e0f`)
     .then(function (resp) {return resp.json()})
     .then((function (data) {
+        document.querySelector('.results').style.display='block';
         document.querySelector('.results').innerHTML='';
         data.forEach(element => {
             let town = document.createElement('li');
@@ -134,12 +135,11 @@ function getImage(conditions){
     }
 }
 
-
 function getCurrentWeather(lat, lon) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=ru&appid=e097db01d3950d1fa7a66a2926093e0f`)
     .then(function (resp) {return resp.json()})
     .then(function (data) {
-
+        document.querySelector('section').style.display='block';
         document.querySelector('section').innerHTML=`
         <p>Погода в</p>
         <h1 class="city">${data.name.toUpperCase()}</h1>
@@ -160,13 +160,17 @@ function getForecast(lat, lon){
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&lang=ru&exclude=current,minutely,hourly,alerts&appid=e097db01d3950d1fa7a66a2926093e0f`)
     .then(function (resp) {return resp.json()})
     .then(function (data) {
+        console.log(data);
+        document.querySelector('.forecast').style.display='block';
         for (let i = 0; i < daysTiles.length; i++) {
             daysTiles[i].innerHTML = `
             <h2>${getWeekday(data.daily[i].dt)}</h2>
             <p class="temp">${temperature(data.daily[i].temp.day)}</p>
             <img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png">
             <p class='description'>${data.daily[i].weather[0].description}</p>
-            <p>Облачность ${data.daily[i].clouds+'%'}</p>
+            <p class='pressure'>Давление: ${data.daily[i].pressure} hPa
+            </p>
+            <p>Ветер ${getWindDirection(data.daily[i].wind_deg)}<br>${Math.round(data.daily[i].wind_speed)} м/с</p>
             `;
         }
     });
