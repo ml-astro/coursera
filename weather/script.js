@@ -1,3 +1,5 @@
+//больше картинок
+
 //7 day/night
 //заход, время сумерек
 //прогноз на ночь
@@ -26,7 +28,6 @@ function setPosition(position) {
 
 function selectCity(){
     let city = document.querySelector('input').value;
-    console.log(city);
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=e097db01d3950d1fa7a66a2926093e0f`)
     .then(function (resp) {return resp.json()})
     .then((function (data) {
@@ -159,7 +160,6 @@ function getForecast(lat, lon){
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&lang=ru&exclude=current,minutely,hourly,alerts&appid=e097db01d3950d1fa7a66a2926093e0f`)
     .then(function (resp) {return resp.json()})
     .then(function (data) {
-        console.log(data);
         document.querySelector('.forecast').style.display='block';
         for (let i = 0; i < daysTiles.length; i++) {
             daysTiles[i].innerHTML = `
