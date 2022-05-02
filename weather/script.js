@@ -1,24 +1,15 @@
 //больше картинок
-
-//7 day/night
-//заход, время сумерек
 //прогноз на ночь
-//северное сияние
-//серебристые облака
-//к индекс
-//солнечные пятна
-//фаза луны
-//восход и заход луны
-//clearoutside meteoblue
 //иконки день / ночь
-//ясно - белый, пасмурно - синий
-//темная тема для астро
-
-
 
 let daysTiles = document.querySelectorAll('li');
 let latitude;
 let longitude;
+document.querySelector('.selectCity input').addEventListener('keypress',function(event){
+    if(event.key == 'Enter'){
+    document.querySelector('button').click();
+}
+})
 navigator.geolocation.getCurrentPosition(setPosition);
 function setPosition(position) {
     latitude = position.coords.latitude;
@@ -27,17 +18,17 @@ function setPosition(position) {
   }
 
 function selectCity(){
-    let city = document.querySelector('input').value;
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=e097db01d3950d1fa7a66a2926093e0f`)
+    let city = document.querySelector('input');
+    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city.value}&limit=5&appid=e097db01d3950d1fa7a66a2926093e0f`)
     .then(function (resp) {return resp.json()})
     .then((function (data) {
-        document.querySelector('.results').style.display='block';
-        document.querySelector('.results').innerHTML='';
+        document.querySelector('.cityresults').style.display='block';
+        document.querySelector('.cityresults').innerHTML='';
         data.forEach(element => {
             let town = document.createElement('li');
             town.innerHTML = element.name + ' ' + element.country;
             town.addEventListener('click', function(){getCurrentWeather(element.lat,element.lon)});
-            document.querySelector('.results').append(town);
+            document.querySelector('.cityresults').append(town);
         });
         
     }))
@@ -48,7 +39,7 @@ function getTime(unix){
 }
 
 function temperature(temp){
-    return Math.round(temp-273.15)+'\xB0C';
+    return `<b>${Math.round(temp-273.15)+'\xB0C'}</b>`;
 }
 
 function getWeekday(unix){
@@ -63,25 +54,18 @@ function getWeekday(unix){
         switch (weekday) {
             case 1:
                 return 'Понедельник';
-                break;
             case 2:
                 return 'Вторник';
-                break;
             case 3:
                 return 'Среда';
-                break;
             case 4:
                 return 'Четверг';
-                break;
             case 5:
                 return 'Пятница';
-                break;
             case 6:
                 return 'Суббота';
-                break;
             case 0:
                 return 'Воскресенье';
-                break;
             default:
                 break;
         }
@@ -91,47 +75,46 @@ function getWeekday(unix){
 function getWindDirection(deg){
     switch (true) {
         case (deg<22.5 || deg<360 && deg>=337.5):
-            return '&#8595; северный'
-            break;
+            return '&#8595; С'
         case deg < 67.5:
-            return '&#8601; северо-восточный'
-            break;
+            return '&#8601; С-В'
         case deg < 112.5:
-            return '&#8592; восточный'
-            break;
+            return '&#8592; В'
         case deg < 157.5:
-            return '&#8598; юго-восточный'
-            break;
+            return '&#8598; Ю-В'
         case deg < 202.5:
-            return '&#8593; южный'
-            break;
+            return '&#8593; Ю'
         case deg < 247.5:
-            return '&#8599; юго-западный'
-            break;
+            return '&#8599; Ю-З'
         case deg < 292.5:
-            return '&#8594; западный'
+            return '&#8594; З'
         case deg < 337.5:
-            return '&#8600; северо-западный'
-            break;
+            return '&#8600; С-З'
         default:
             break;
     }
 }
 
 function getImage(conditions){
-    switch (conditions) {
-        case 'Rain':
+    switch (true) {
+        case conditions == 800:
+            return './img/clearsky_hd.jpg'
+        case conditions < 300:
+            return './img/storm_1280.png';
+        case conditions < 400:
+            return './img/drizzle.jpg';
+        case conditions < 600:
             return './img/rain_1920.jpg';
-            break;
-        case 'Clouds':
-            return './img/broken.jpg';
-            break;
-        case 'Clear':
-            return './img/clearsky.jpg';
-            break;
-        default:
-            return './img/scattered.jpg';
-            break;
+        case conditions < 700:
+            return './img/snowfall_1920.jpg'
+        case conditions < 770:
+            return './img/mist_1920.jpg'
+        case conditions < 800:
+            return './img/shelf_cloud.jpg'
+        case conditions < 803:
+            return './img/scattered.jpg'
+        case conditions < 805:
+            return './img/overcast.jpg'
     }
 }
 
@@ -139,19 +122,26 @@ function getCurrentWeather(lat, lon) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=ru&appid=e097db01d3950d1fa7a66a2926093e0f`)
     .then(function (resp) {return resp.json()})
     .then(function (data) {
-        document.querySelector('section').style.display='block';
+        console.log(data);
+        document.querySelector('section').style.display='flex';
         document.querySelector('section').innerHTML=`
         <p>Погода в</p>
         <h1 class="city">${data.name.toUpperCase()}</h1>
         <p class="temp">${temperature(data.main.temp)}</p>
         <p class="description">${data.weather[0].description}</p>
         <p>Ощущается как: ${temperature(data.main.feels_like)}</p>
-        <p>Ветер ${getWindDirection(data.wind.deg)}<br>${Math.round(data.wind.speed)} м/с</p>
-        <p class="pressure">Давление: <span>${data.main.pressure} hPa</span></p>
+        <br>
+        <p>Ветер ${getWindDirection(data.wind.deg)}<br><b>${Math.round(data.wind.speed)}</b> м/с</p>
+        ${data.wind.gust?`<p>Порывы до <b class='warning'>${Math.round(data.wind.gust)}</b> м/с</p>`:``}
+        <br>
+        <p class="pressure">Давление:<span>${data.main.pressure} hPa</span></p>
+        <br>
         <p>Восход: ${getTime(data.sys.sunrise)}</p>
         <p>Закат: ${getTime(data.sys.sunset)}</p>
+        <br>
+        <small>По состоянию на ${getTime(data.dt)}</small>
         `;
-    document.querySelector('body').style.backgroundImage = `url(${getImage(data.weather[0].main)})`;
+    document.querySelector('body').style.backgroundImage = `url(${getImage(data.weather[0].id)})`;
     getForecast(lat, lon);
 });
 }
@@ -166,10 +156,11 @@ function getForecast(lat, lon){
             <h2>${getWeekday(data.daily[i].dt)}</h2>
             <p class="temp">${temperature(data.daily[i].temp.day)}</p>
             <img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png">
-            <p class='description'>${data.daily[i].weather[0].description}</p>
-            <p class='pressure'>Давление: ${data.daily[i].pressure} hPa
-            </p>
-            <p>Ветер ${getWindDirection(data.daily[i].wind_deg)}<br>${Math.round(data.daily[i].wind_speed)} м/с</p>
+            <p class="description">${data.daily[i].weather[0].description}</p>
+
+            <p class="pressure">Давление: <span>${data.daily[i].pressure}</span>&nbsp;hPa</p>
+
+            <p>Ветер ${getWindDirection(data.daily[i].wind_deg)}<br><b>${Math.round(data.daily[i].wind_speed)}</b> м/с</p>
             `;
         }
     });
