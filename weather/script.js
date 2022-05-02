@@ -146,11 +146,13 @@ function getForecast(lat, lon){
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&lang=ru&exclude=current,minutely,hourly,alerts&appid=e097db01d3950d1fa7a66a2926093e0f`)
     .then(function (resp) {return resp.json()})
     .then(function (data) {
+        console.log(data.daily);
         document.querySelector('.forecast').style.display='block';
         for (let i = 0; i < daysTiles.length; i++) {
             daysTiles[i].innerHTML = `
             <h2>${getWeekday(data.daily[i].dt)}</h2>
             <p class="temp">${temperature(data.daily[i].temp.day)}</p>
+            <p class="description">Ночью ${temperature(data.daily[i].temp.night)}</p>
             <img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png">
             <p class="description">${data.daily[i].weather[0].description}</p>
             <p class="pressure">Давление: <span>${data.daily[i].pressure}</span>&nbsp;hPa</p>

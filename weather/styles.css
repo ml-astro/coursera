@@ -82,6 +82,8 @@ section, .forecast li {
 
 img {
     width: 100%;
+    max-width: 150px;
+    margin: 0 auto;
 }
 
 ul {
@@ -95,7 +97,6 @@ li {
     padding: 1em;
     list-style-type: none;
     width: 19%;
-    max-width: 220px;
 }
 
 .selectCity li {
@@ -197,7 +198,7 @@ button {
         position: relative;
     }
 
-    p {
+    .description {
         text-align: left;
     }
 
