@@ -152,7 +152,7 @@ function getForecast(lat, lon){
             daysTiles[i].innerHTML = `
             <h2>${getWeekday(data.daily[i].dt)}</h2>
             <p class="temp">${temperature(data.daily[i].temp.day)}</p>
-            <p class="description">Ночью ${temperature(data.daily[i].temp.night)}</p>
+            <p class="pressure">Ночью ${temperature(data.daily[i].temp.night)}</p>
             <img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png">
             <p class="description">${data.daily[i].weather[0].description}</p>
             <p class="pressure">Давление: <span>${data.daily[i].pressure}</span>&nbsp;hPa</p>
