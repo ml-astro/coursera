@@ -1,5 +1,7 @@
 //больше картинок
 //прогноз на ночь
+//media query фоны
+//сжать картинки
 //иконки день / ночь
 
 let daysTiles = document.querySelectorAll('li');
@@ -122,7 +124,6 @@ function getCurrentWeather(lat, lon) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=ru&appid=e097db01d3950d1fa7a66a2926093e0f`)
     .then(function (resp) {return resp.json()})
     .then(function (data) {
-        console.log(data);
         document.querySelector('section').style.display='flex';
         document.querySelector('section').innerHTML=`
         <p>Погода в</p>
@@ -130,16 +131,11 @@ function getCurrentWeather(lat, lon) {
         <p class="temp">${temperature(data.main.temp)}</p>
         <p class="description">${data.weather[0].description}</p>
         <p>Ощущается как: ${temperature(data.main.feels_like)}</p>
-        <br>
         <p>Ветер ${getWindDirection(data.wind.deg)}<br><b>${Math.round(data.wind.speed)}</b> м/с</p>
         ${data.wind.gust?`<p>Порывы до <b class='warning'>${Math.round(data.wind.gust)}</b> м/с</p>`:``}
-        <br>
-        <p class="pressure">Давление:<span>${data.main.pressure} hPa</span></p>
-        <br>
+        <p class="pressure">Давление: <span>${data.main.pressure} hPa</span></p>
         <p>Восход: ${getTime(data.sys.sunrise)}</p>
         <p>Закат: ${getTime(data.sys.sunset)}</p>
-        <br>
-        <small>По состоянию на ${getTime(data.dt)}</small>
         `;
     document.querySelector('body').style.backgroundImage = `url(${getImage(data.weather[0].id)})`;
     getForecast(lat, lon);
@@ -157,9 +153,7 @@ function getForecast(lat, lon){
             <p class="temp">${temperature(data.daily[i].temp.day)}</p>
             <img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png">
             <p class="description">${data.daily[i].weather[0].description}</p>
-
             <p class="pressure">Давление: <span>${data.daily[i].pressure}</span>&nbsp;hPa</p>
-
             <p>Ветер ${getWindDirection(data.daily[i].wind_deg)}<br><b>${Math.round(data.daily[i].wind_speed)}</b> м/с</p>
             `;
         }
