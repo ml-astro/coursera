@@ -1,9 +1,3 @@
-//больше картинок
-//прогноз на ночь
-//media query фоны
-//сжать картинки
-//иконки день / ночь
-
 let daysTiles = document.querySelectorAll('li');
 let latitude;
 let longitude;
@@ -100,17 +94,17 @@ function getWindDirection(deg){
 function getImage(conditions){
     switch (true) {
         case conditions == 800:
-            return './img/clearsky_hd.jpg'
+            return './img/clear.jpg'
         case conditions < 300:
-            return './img/storm_1280.png';
+            return './img/storm.jpg';
         case conditions < 400:
             return './img/drizzle.jpg';
         case conditions < 600:
-            return './img/rain_1920.jpg';
+            return './img/rain.jpg';
         case conditions < 700:
-            return './img/snowfall_1920.jpg'
+            return './img/snowfall.jpg'
         case conditions < 770:
-            return './img/mist_1920.jpg'
+            return './img/mist.jpg'
         case conditions < 800:
             return './img/shelf_cloud.jpg'
         case conditions < 803:
