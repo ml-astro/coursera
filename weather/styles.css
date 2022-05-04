@@ -149,6 +149,13 @@ button {
 }
 }
 
+@media (max-width: 1060px) {
+    .selectCity {
+        position: relative;
+    }
+
+}
+
 @media (max-width: 1024px) {
 .city,.temp,h2 {
     font-size:1em
@@ -200,6 +207,6 @@ img {
 }
 
 li p:last-child,.selectCity {
-    position:relative
+    position:relative;
 }
 }
