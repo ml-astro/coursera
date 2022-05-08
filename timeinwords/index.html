@@ -13,6 +13,9 @@
             margin-top: 2em;
             text-align: center;
         }
+        span {
+            text-transform:initial;
+        }
     </style>
 </head>
 <body>
@@ -115,7 +118,7 @@
             hours = currentTime.getHours()
             minutes = currentTime.getMinutes()
             seconds = currentTime.getSeconds()
-            document.querySelector('h1').innerHTML=hoursNumber(hours) + ' ' + hourPlural(hours) + '<br><br>' + sayNumber(minutes) + ' ' + minutePlural(minutes) + '<br><br>' + sayNumber(seconds) + secondPlural(seconds)
+            document.querySelector('h1').innerHTML=hoursNumber(hours) + '<br><span>' + hourPlural(hours) + '</span><br><br>' + sayNumber(minutes) + '<br><span>' + minutePlural(minutes) + '</span><br><br>' + sayNumber(seconds) + '<br><span>'+ secondPlural(seconds) +'</span>'
         }
 
     </script>
