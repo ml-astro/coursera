@@ -140,7 +140,6 @@ function getForecast(lat, lon){
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&lang=ru&exclude=current,minutely,hourly,alerts&appid=e097db01d3950d1fa7a66a2926093e0f`)
     .then(function (resp) {return resp.json()})
     .then(function (data) {
-        console.log(data.daily);
         document.querySelector('.forecast').style.display='block';
         for (let i = 0; i < daysTiles.length; i++) {
             daysTiles[i].innerHTML = `
