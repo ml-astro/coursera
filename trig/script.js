@@ -69,3 +69,5 @@ function calculate() {
   }
   else {console.log('что-то пошло не так');}
 }
+
+//edit
